@@ -1,26 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+const Login = ()=>import(/* webpackChunkName: "Login_Home_Welcome" */ '../components/Login')
+const Super = ()=>import('../components/SuperUser/SuperUser.vue')
+const SuperHelp = ()=>import('../components/SuperUser/SuperHelp.vue')
+const SuperHome = ()=>import('../components/SuperUser/SuperHome.vue')
+const User = ()=>import('../components/SuperUser/user.vue')
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    redirect:'/login'
+  },{
+    path:'/login',
+    component:Login
+  },{
+    path:'/superUser',
+    component:Super,
+    redirect:'/superHome',
+    children:[{
+      path:'/superHome',
+      component:SuperHome
+    },{
+      path:'/user',
+      component:User
+    },{
+      path:'/superHelp',
+      component:SuperHelp
+    }]
   }
 ]
 
 const router = new VueRouter({
+  mode:'history',
   routes
 })
 
