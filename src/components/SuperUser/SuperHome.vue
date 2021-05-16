@@ -46,8 +46,8 @@ export default {
 
 <style>
     .mains{
-        width: 800px;
-        margin-left: 100px;
+        width:700px;
+        margin-left: 150px;
         margin-top: 20px;
         height: 100%;
         float: left;
@@ -59,7 +59,7 @@ export default {
         float: right;
         width: 400px;
         margin-top: 20px;
-        margin-right:80px ;
+        margin-right:150px ;
     }
     .title{
         font-size:18px;

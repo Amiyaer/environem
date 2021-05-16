@@ -1,6 +1,7 @@
 <template>
   <div>
-      <div style="falot:left;">
+      <div class="leftPart">
+          <div style="falot:left;">
           <img class="headIcon" src="../assets/img/城市.png">
           <span class="logo">速应</span>
           <span class="headIconP">环境应急管理系统</span>
@@ -15,16 +16,18 @@
               <p>账号</p>
               <el-input v-model="loginName" placeholder="输入用户名"></el-input>
               <p>密码</p>
-              <el-input v-model="passWord" placeholder="输入密码"></el-input>
+              <el-input type="password" v-model="passWord" placeholder="输入密码"></el-input>
           </div>
-          <el-button @click="login()">login</el-button>
+          <el-button @click="login()"><span style="color:white">Login</span></el-button>
           <p class="word">还没有账号？
-              <u style="color:rgb(23, 123, 204);">立即联系管理员注册</u>
+              <el-link href="/register" style="color:rgb(23, 123, 204);">立即注册</el-link>
           </p>
           <img class="img" src="../assets/img/登陆方式.png">
       </div>
+      </div>
+      
       <div class="rightPart">
-          
+          <img class="rightImg" src="../assets/img/登录右.jpg" >
       </div>
   </div>
 </template>
@@ -33,7 +36,8 @@
 export default {
   data () {
     return {
-
+        loginName:'admin',
+        passWord:'12345'
     }
   },
 
@@ -50,20 +54,25 @@ export default {
 </script>
 
 <style>
+    .leftPart{
+        float: left;
+    }
     .loginPanel{
         width: 420px;
         height: 520px;
-        border: 3px solid rgb(212, 212, 212);
+        
         border-radius: 15px;
         margin-left: 300px;
         margin-top: 50px;
         float: left;
+        box-shadow: 3px 3px 18px rgba(0, 0, 0, 0.2);
+
     }
     .LoginCom{
         font-weight:bold;
         padding-left: 14px;
         padding-right: 14px;
-        color: rgb(116, 199, 255);
+        color: rgb(35, 91, 218);
     }
     #bigp{
         font-size: 25px;
@@ -80,7 +89,7 @@ export default {
     }
     .el-button{
         text-align:center;
-        background:rgb(116, 199, 255);
+        background:rgb(35, 91, 218);
         color: black;
         margin-top:15px;
         width: 393px;
@@ -98,7 +107,7 @@ export default {
         font-size: 25px;
         font-weight: bold;
         margin-left:5px ;
-        color: rgb(88, 140, 252);
+        color: rgb(35, 91, 218);
     }
     .headIconP{
         font-size: 15px;
@@ -106,8 +115,9 @@ export default {
         color: rgb(97, 97, 97);
     }
     .rightPart{
-        width: 500px;
-        background: rgb(116, 199, 255);
         float: right;
+    }
+    .rightImg{
+        height: 718px;
     }
 </style>

@@ -12,9 +12,8 @@
               <span class="logo">速应</span>
               <span class="headIconP">环境应急管理系统</span>
             </span>
-            <el-menu-item index="/superHome">主页</el-menu-item>
-            <el-menu-item index="user">用户管理</el-menu-item>
-            <el-menu-item index="/superHelp">帮助</el-menu-item>
+            <el-menu-item index="/staffHome">主页</el-menu-item>
+            <el-menu-item index="/staffHelp">帮助</el-menu-item>
             <el-dropdown style="float:right;margin-top:10px" @command="logout">
                 <el-avatar size="medium" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
                 <el-dropdown-menu slot="dropdown">
