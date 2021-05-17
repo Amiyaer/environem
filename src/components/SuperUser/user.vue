@@ -26,6 +26,9 @@
                         <el-form-item label="出生日期">
                             <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
                         </el-form-item>
+                        <el-form-item label="住址">
+                            <el-input v-model="form.address"></el-input>
+                        </el-form-item>
                         <el-form-item label="会员类型">
                             <el-select v-model="form.peopleType" placeholder="请选择用户类型">
                                 <el-option label="工作人员" value="工作人员"></el-option>
@@ -129,8 +132,8 @@
             <div>
                 <el-avatar style="margin-top: 20px" :size="80" :src="circleUrl"></el-avatar>
                 <div style="float: right">
-                    <Strong><p style="font-size: 28px; margin-bottom: 1px">王小虎</p></Strong>
-                    <el-tag type="success" size="small" >工作人员</el-tag>
+                    <Strong><p style="font-size: 28px; margin-bottom: 1px">{{form.name}}</p></Strong>
+                    <el-tag type="success" size="small" >{{form.peopleType}}</el-tag>
                 </div>
             </div>
             <div class="info-user">
@@ -159,6 +162,8 @@
     export default {
         data () {
             return {
+                input3:"",
+                ids:[],
                 command:0,
                 dialogFormVisible: false,
                 form: {
@@ -176,115 +181,7 @@
                 },
                 formLabelWidth: '70px',
                 circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-                tableData: [{
-                    id:1,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:2,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:3,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:4,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:5,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:6,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:7,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:8,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                },{
-                    id:9,
-                    username:'HelloWord',
-                    password:'123456',
-                    age:18,
-                    peopleNo:"001",
-                    status:'正常',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    peopleType:"工作人员",
-                    sex:"男"
-                }],
+                tableData: [],
                 database: [{
                     id:1,
                     username:'HelloWord',
@@ -393,43 +290,104 @@
                     address: '上海市普陀区金沙江路 1518 弄',
                     peopleType:"工作人员",
                     sex:"男"
-                }]
+                }],
+                start:0
             }
         },
 
         created () {
 
         },
+        mounted:function(){
+            this.createcode();//需要触发的函数
+        },
 
         methods: {
+            createcode(){
+                this.tableData = this.database;
+            },
             row_click(val){
                 this.form = val;
             },
-            handleSelectionChange(){
-                console.log(100);
+            handleSelectionChange(row){
+                console.log(row)
+                this.ids = row;
             },
 
             search(){
-
+                let users = this.tableData;
+                for (let i = users.length - 1; i >= 0 ; i--) {
+                    if(users[i].name.indexOf(this.input3) < 0){
+                        this.tableData.splice(i,1);
+                    }
+                }
             },
             onSubmit() {
                 this.dialogFormVisible = false;
+                console.log(this.command)
+                if(this.command == 1){
+                    //id peopleNo 地址 age
+                    let u = this.database;
+                    let id = u[u.length - 1].id + 1;
+                    let peopleNo = "002";
+
+                    let birthdays = new Date(this.form.date);
+                    let d = new Date();
+                    let age =
+                        d.getFullYear() -
+                        birthdays.getFullYear() -
+                        (d.getMonth() < birthdays.getMonth() ||
+                        (d.getMonth() == birthdays.getMonth() &&
+                            d.getDate() < birthdays.getDate())
+                            ? 1
+                            : 0);
+
+                    this.form.id = id;
+                    this.form.peopleNo = peopleNo;
+                    this.form.age = age;
+                    this.database.push(this.form);
+                }else{
+                    let users = this.tableData;
+                    for (let i = 0; i < users.length; i++) {
+                        if(users[i].id == this.form.id){
+                            users[i] = this.form;
+                            break;
+                        }
+                    }
+                }
+                this.command = 0;
             },
             add(){
                 this.dialogFormVisible = true;
-                this.database.push(this.form);
+                this.command = 1;
+                this.form = {};
             },
             editInfo(){
                 this.dialogFormVisible = true;
+                this.command = 2;
             },
-            tableEdit(){
+            tableEdit(index,row){
                 this.dialogFormVisible = true;
+                this.command = 3;
+                this.form = row;
             },
-            tableDel(){
-
+            tableDel(index,row){
+                let users = this.tableData;
+                for (let i = 0; i < users.length; i++) {
+                    if(users[i].id == row.id){
+                        users.splice(i,1);
+                        break;
+                    }
+                }
             },
             deleteSelect(){
-
+                let users = this.tableData;
+                let id = this.form.id;
+                for (let id1 of this.ids) {
+                    this.form.id = id1.id;
+                    this.deleteInfo();
+                }
+                this.form.id = id;
             },
             deleteInfo(){
                 let users = this.tableData;
